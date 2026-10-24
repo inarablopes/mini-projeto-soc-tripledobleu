@@ -6,7 +6,7 @@
 ![Foco](https://img.shields.io/badge/Foco-Resposta%20a%20Incidentes-C0392B?style=flat-square)
 ![Ferramentas](https://img.shields.io/badge/An%C3%A1lise-SIEM%20%C2%B7%20IDS%20%C2%B7%20Logs-2C3E50?style=flat-square)
 
-**Autora:** Inara Lopes · **Programa:** Mulher Digital (Junior Achievement Américas) · **Tipo:** Mini projeto técnico
+ **Programa:** Mulher Digital (Junior Achievement Américas) · **Tipo:** Mini projeto técnico
 
 ---
 
@@ -44,15 +44,15 @@ flowchart LR
 
 ## 2. Contexto da empresa
 
-- 🏢 **Tripledobleu Inc.**: serviços financeiros e plataformas digitais, com operações no México, Colômbia e Estados Unidos.
-- 🏠 **Modelo híbrido**: centenas de funcionários acessam servidores e aplicações pela VPN todos os dias.
-- ⚠️ **Fraquezas já conhecidas**: senhas fracas, MFA não obrigatório, servidores legados e alertas acumulados sem revisão.
+- **Tripledobleu Inc.**: serviços financeiros e plataformas digitais, com operações no México, Colômbia e Estados Unidos.
+- **Modelo híbrido**: centenas de funcionários acessam servidores e aplicações pela VPN todos os dias.
+- **Fraquezas já conhecidas**: senhas fracas, MFA não obrigatório, servidores legados e alertas acumulados sem revisão.
 
 ---
 
 ## 3. Análise das evidências (logs)
 
-### 3.1 📧 Phishing: o ponto de partida
+### 3.1 Phishing: o ponto de partida
 
 ![Evidência 07 - Phishing](evidencias/07-phishing.png)
 
@@ -65,7 +65,7 @@ flowchart LR
 
 ---
 
-### 3.2 🚨 Tentativas de login malsucedidas
+### 3.2 Tentativas de login malsucedidas
 
 ![Evidência 01 - Tentativas de login](evidencias/01-tentativas-de-login.png)
 
@@ -78,7 +78,7 @@ flowchart LR
 
 ---
 
-### 3.3 🔓 Acesso VPN bem-sucedido
+### 3.3 Acesso VPN bem-sucedido
 
 ![Evidência 02 - Acesso VPN](evidencias/02-acesso-vpn-bem-sucedido.png)
 
@@ -87,11 +87,11 @@ flowchart LR
 - usou **somente senha** (`Password Only`) com **MFA desativado**;
 - o dispositivo era um **host Windows desconhecido**.
 
-> 💡 **Este é o momento do comprometimento.** Com MFA, a senha roubada não seria suficiente: foi a principal falha de controle do caso.
+> **Este é o momento do comprometimento.** Com MFA, a senha roubada não seria suficiente: foi a principal falha de controle do caso.
 
 ---
 
-### 3.4 🌐 Consultas DNS internas
+### 3.4  Consultas DNS internas
 
 ![Evidência 03 - Consultas DNS](evidencias/03-consultas-dns-internas.png)
 
@@ -103,7 +103,7 @@ flowchart LR
 
 ---
 
-### 3.5 📡 Varreduras: alerta do IDS
+### 3.5 Varreduras: alerta do IDS
 
 ![Evidência 04 - Varreduras IDS](evidencias/04-varreduras-ids.png)
 
@@ -116,7 +116,7 @@ flowchart LR
 
 ---
 
-### 3.6 🔑 Permissões excessivas: movimentação lateral
+### 3.6 Permissões excessivas: movimentação lateral
 
 ![Evidência 05 - Permissões excessivas](evidencias/05-permissoes-excessivas.png)
 
@@ -128,7 +128,7 @@ flowchart LR
 
 ---
 
-### 3.7 📦 Compactação e exfiltração de dados
+### 3.7  Compactação e exfiltração de dados
 
 ![Evidência 06 - Exfiltração](evidencias/06-exfiltracao-de-arquivos.png)
 
@@ -137,17 +137,17 @@ flowchart LR
 - logo depois, **11,2 GB** saíram por HTTPS para `cloud-sync-storage.net`;
 - o volume é muito acima do normal do servidor.
 
-> 💡 O **SIEM correlacionou** os eventos e gerou o alerta **CRITICAL**, mas **tarde**: os dados já estavam saindo.
+> O **SIEM correlacionou** os eventos e gerou o alerta **CRITICAL**, mas **tarde**: os dados já estavam saindo.
 
 ---
 
 ## 4. Ameaças, vulnerabilidades e engenharia social
 
-### 🎯 Ameaças identificadas
+### Ameaças identificadas
 
 `Phishing` · `Comprometimento de conta` · `Acesso não autorizado` · `Reconhecimento interno` · `Movimentação lateral` · `Exfiltração de dados`
 
-### 🕳️ Vulnerabilidades que facilitaram o incidente
+### Vulnerabilidades que facilitaram o incidente
 
 | Vulnerabilidade | Consequência |
 |---|---|
@@ -168,7 +168,7 @@ O e-mail usou **falsa autoridade** (TI), **urgência** ("atualização obrigató
 
 ## 5. Resposta inicial e contenção
 
-### 🔴 Imediatas (primeiros minutos)
+### Imediatas (primeiros minutos)
 
 1. **Confirmar o incidente** e escalar ao responsável de segurança.
 2. **Encerrar a sessão VPN** e **bloquear a conta** da Valentina.
@@ -177,7 +177,7 @@ O e-mail usou **falsa autoridade** (TI), **urgência** ("atualização obrigató
 5. **Isolar `FIN-SRV-04` e `FILE-SRV-03`**, preservando o estado para investigação.
 6. **Preservar evidências** (logs, capturas e horários).
 
-### 🟠 Curto prazo (primeiras horas)
+### Curto prazo (primeiras horas)
 
 7. **Redefinir a senha** e revogar sessões ativas.
 8. **Bloquear os domínios de phishing** (`secure-access-update.com` e `microsoft365-secure-auth.com`).
@@ -185,7 +185,7 @@ O e-mail usou **falsa autoridade** (TI), **urgência** ("atualização obrigató
 10. **Buscar o IP** em logs de outras contas e **revisar `HR-SRV-02` e `BACKUP-SRV-01`**.
 11. **Determinar quais dados foram enviados**.
 
-### 🟡 Médio prazo
+### Médio prazo
 
 12. **Exigir MFA** para todas as contas, começando por VPN e áreas financeiras.
 13. **Aplicar menor privilégio** e **segmentar a rede**.
@@ -196,24 +196,24 @@ O e-mail usou **falsa autoridade** (TI), **urgência** ("atualização obrigató
 
 ## 6. Impacto e lições aprendidas
 
-### 💥 Impacto operacional
+### Impacto operacional
 
 - **Operações paradas:** sistemas financeiros desconectados, equipes sem acesso a relatórios e pagamentos automatizados falhando.
 - **Dados em risco:** possível exposição de informações de clientes corporativos, operações financeiras e documentos internos.
 - **Risco para o negócio:** custo de investigação e recuperação, possíveis implicações legais e perda de confiança dos clientes.
 
-### 🧱 Controles de segurança
+### Controles de segurança
 
 | ✅ Existiam | ❌ Faltaram ou eram fracos |
 |---|---|
 | SIEM, IDS, e-mail gateway, VPN e logs centralizados | MFA obrigatório, bloqueio por país/dispositivo, IPS ativo |
 | Monitoramento do SOC | Menor privilégio, segmentação de rede, DLP e controle de saída |
 
-### 🔔 Sinais que poderiam ter alertado o SOC
+###  Sinais que poderiam ter alertado o SOC
 
 Phishing em quarentena **dias antes** → 3 falhas de login de outro país → login VPN sem MFA em host desconhecido → consultas DNS fora do perfil → **alerta de alta severidade do IDS**.
 
-> 💡 **Lição principal:** os sinais apareceram **cerca de 30 minutos antes** do alerta crítico. Tratar as primeiras falhas de login como incidente, e não como possível falso positivo, teria dado tempo de conter o ataque antes da perda de dados.
+> **Lição principal:** os sinais apareceram **cerca de 30 minutos antes** do alerta crítico. Tratar as primeiras falhas de login como incidente, e não como possível falso positivo, teria dado tempo de conter o ataque antes da perda de dados.
 
 ---
 
